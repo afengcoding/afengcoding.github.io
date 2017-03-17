@@ -1,0 +1,1040 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="cocoapods," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、 什么是CocoapodsCocoapods 是专门为xcode设计,用来管理第三方代码库的工具；所需的第三方依赖库，需要在Podfile文件里面进行配置。
+
+许多人刚开始使用cocopods的时候，可能认为pod install 只是在首次配置自己项目的时候使用，pod update在以后使用，那么这样认为就大错特错了
+
+二、 pod install vs. pod update 、pod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocoapos 的使用">
+<meta property="og:url" content="http://yoursite.com/2017/03/16/Cocoapos-的使用/index.html">
+<meta property="og:site_name" content="Stay Hungry, Stay Foolish !">
+<meta property="og:description" content="一、 什么是CocoapodsCocoapods 是专门为xcode设计,用来管理第三方代码库的工具；所需的第三方依赖库，需要在Podfile文件里面进行配置。
+
+许多人刚开始使用cocopods的时候，可能认为pod install 只是在首次配置自己项目的时候使用，pod update在以后使用，那么这样认为就大错特错了
+
+二、 pod install vs. pod update 、pod">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1860571-de0d3fcb105dd495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1860571-4df421453ed9418b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1860571-b58f66600fd5300d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-17T09:49:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocoapos 的使用">
+<meta name="twitter:description" content="一、 什么是CocoapodsCocoapods 是专门为xcode设计,用来管理第三方代码库的工具；所需的第三方依赖库，需要在Podfile文件里面进行配置。
+
+许多人刚开始使用cocopods的时候，可能认为pod install 只是在首次配置自己项目的时候使用，pod update在以后使用，那么这样认为就大错特错了
+
+二、 pod install vs. pod update 、pod">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1860571-de0d3fcb105dd495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/16/Cocoapos-的使用/"/>
+
+
+
+
+
+  <title> Cocoapos 的使用 | Stay Hungry, Stay Foolish ! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?abfbcf7eb46d406e8cbd232a84df09af";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stay Hungry, Stay Foolish !</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/Cocoapos-的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Simple">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stay Hungry, Stay Foolish !">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Cocoapos 的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T22:45:24+08:00">
+                2017-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/16/Cocoapos-的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/16/Cocoapos-的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、-什么是Cocoapods"><a href="#一、-什么是Cocoapods" class="headerlink" title="一、 什么是Cocoapods"></a>一、 什么是Cocoapods</h1><p>Cocoapods 是专门为xcode设计,用来管理第三方代码库的工具；所需的第三方依赖库，需要在Podfile文件里面进行配置。</p>
+<blockquote>
+<p>许多人刚开始使用cocopods的时候，可能认为pod install 只是在首次配置自己项目的时候使用，pod update在以后使用，那么这样认为就大错特错了</p>
+</blockquote>
+<h1 id="二、-pod-install-vs-pod-update-、pod-outdated"><a href="#二、-pod-install-vs-pod-update-、pod-outdated" class="headerlink" title="二、 pod install vs. pod update 、pod outdated"></a>二、 pod install vs. pod update 、pod outdated</h1><ul>
+<li><code>pod install</code> 是用来安装一个新的<code>pods</code>依赖库，或者说<code>pod install</code> 当你想把一个<code>pods</code> 依赖移除或者添加到工程的时候使用；</li>
+<li><code>pod update</code> 仅仅是望你想要更新pods到较新版本的时候使用</li>
+<li>当运行<code>pod install</code> 命令的时候，它的操作步骤是：下载和安装新的<code>pods</code>— 在<code>Podfile.lock</code>文件写入每一个已经安装<code>pods</code>的版本号；这个文件用来追踪和锁定所安装的pods的版本号。</li>
+<li><code>pod install</code>  仅仅处理那些没有在<code>podfile.lock</code>列出的依赖库<code>pods</code>。对于已经在<code>Podfile.lock</code>文件里的<code>pods</code>,它仅仅下载在<code>Podfile.lock</code>里面锁定的版本，并不去检查是否有可用的最新版本；对于没有在<code>Podfile.lock</code>的<code>pods</code>，它会搜索和匹配在Podfile文件里面所描述的对应的版本（e.g <code>pod &#39;AFNetworking&#39;, &#39;~&gt;3.0&#39;</code>)。</li>
+<li><p><code>pod  outdated</code>命令 <code>Cocoapods</code>会列出项目中<code>Podfile.lock</code>文件里面锁定的版本具有新版本可以更新的pods。<br>这个是我的工程里面对应的Podfile， 列出了工程需要的依赖库：<br><img src="http://upload-images.jianshu.io/upload_images/1860571-de0d3fcb105dd495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-01-12 下午5.00.42.png"><br>下面这个截图是 <code>pod outdated</code>命令后，找出了有新版本可以更新的第三方库<br><img src="http://upload-images.jianshu.io/upload_images/1860571-4df421453ed9418b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-01-12 下午5.01.16.png"><br>下面的截图是<code>Podfile.lock</code>文件中锁定的第三方库的版本，以及对应的版本号<br><img src="http://upload-images.jianshu.io/upload_images/1860571-b58f66600fd5300d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-01-12 下午5.04.12.png"></p>
+<blockquote>
+<p>对比截图二和截图三，我们可以看出，在<code>Podfile.lock</code>文件中，<code>Masonry</code>、<code>SDWebImage</code>、<code>Realm</code>这三个库锁定的版本号是比较老的版本，运行命令<code>pod outdated</code>后，就列出了可以更新的版本号。</p>
+</blockquote>
+</li>
+<li><p><code>pod update</code> 当你运行 <code>pod update podName</code>, <code>Cocoapods</code>会找出podName 可以更新的的版本（除了在Podfile.lock里面已经列出锁定的版本）， 它会根据Podfile.lock文件里面的限制条件，尽可能对升级podName到比较新的可用的版本。如果<code>pod update</code> 后面不添加<code>podName</code>的话，<code>Cocoapods</code> 会根据<code>Podfile</code>文件里面列出的<code>pods</code>,把每一个<code>pod</code>更新到相应比较新的可用的版本。</p>
+</li>
+</ul>
+<h1 id="三、-那么到底在那些场景下使用呢用呢？"><a href="#三、-那么到底在那些场景下使用呢用呢？" class="headerlink" title="三、 那么到底在那些场景下使用呢用呢？"></a>三、 那么到底在那些场景下使用呢用呢？</h1><ul>
+<li>对于<code>pod update PODNAME</code> 这个命令，仅仅是更新一个特定的<code>pod</code>(这个操作会根据<code>Podfile</code>文件的配置检测特定的<code>pod</code>是否存在可更新版本，如果就相应的进行更新）。与之相反的是命令<code>pod install</code>这个命令并不会尝试检测更新已经安装<code>pod</code>。</li>
+<li>当你在<code>Podfile</code>里面添加了新的<code>pod</code>，那么最好选择使用<code>pod install</code>，而不是选择<code>pod update</code> , 因为<code>pod install</code> 可以避免安装和 更新操作在一个线程里面进行，从而提高效率，节省安装时间，但这并不是说 <code>pod update</code> 不行，而是相对来说这种场景下用<code>pod install</code>更好一些。</li>
+<li><code>pod update</code> 命令，当你想要更新某一个特定的<code>pod</code> 或者所有的<code>pod</code>的时候是最好的选择。</li>
+</ul>
+<h1 id="四、Commit-提交-Podfile-lock"><a href="#四、Commit-提交-Podfile-lock" class="headerlink" title="四、Commit 提交 Podfile.lock"></a>四、Commit 提交 Podfile.lock</h1><p>作为一个提醒：即使你的代码管理策略中，提交代码的时候并不提交Pods文件夹到共享的代码仓库中，但是提交和上床<code>Podfile.lock</code>文件是很有必要的，否则的话，上面对于命令 <code>pod install</code>的功能解释（<code>pod install</code>可以安装锁定的相应版本）将不再适用。</p>
+<h1 id="五、适用场景举例"><a href="#五、适用场景举例" class="headerlink" title="五、适用场景举例"></a>五、适用场景举例</h1><ul>
+<li><p>阶段一：用户<code>user1</code>创建了一个工程<br><code>user1</code> 创建了一个工程，想使用pods A 、B 、C, 那么然后创建一个<code>Podfile</code>， 将对应的版本添加到Podfile里面，运行 <code>pod install</code> , 将会安装 A、B、C，我们假设此时指定使用的版本都为<code>1.0.0</code>;<br><code>Podfile.lock</code> 将会持续追踪限制安装A、B、C的版本都为<code>1.0.0</code>；</p>
+<blockquote>
+<p>此外：因为这是第一次运行<code>pod install</code>命令， 此时<code>Pods.xcodeproj</code>并不存在， 那么运行 <code>pod install</code>命令后，除了安装pods外，还会创建<code>Pods.xcodeproj</code>和<code>.xcworkspace</code>。</p>
+</blockquote>
+</li>
+<li><p>阶段2: 用户<code>user1</code> 添加了一个新的<code>pod</code><br>不久后，<code>user1</code>想添加一个 pod D到Podfile文件。<br>这时运行<code>pod install</code>之后，即使这个时候对于pod B有一个 用于维护的 <code>Released 1.1.0</code>版本，那么工程任然会保持pod B是版本<code>1.0.0</code>，因为用户user1 想要的是 pod D， 而不是其他版本的pod B。</p>
+</li>
+<li>阶段3： 用户<code>user2</code>加入工程<br>对于<code>user2</code> 加入这个团队之前从没用在这个工程工作过，他将会<code>clone</code>仓库并且<code>pod install</code>；<br><code>Podfile.lock</code>文件的内容（这个内容应该是被提交到git 仓库的）将会保证<code>user2</code>获得的pod 和user1正在使用的pod是一样版本的pod；<br>即使现在对于pod C有一个<code>1.2.0</code>可用的版本，<code>user2</code> 也只会安装使用 C <code>1.0.0</code>版本，这就要归功于<code>Podfile.lock</code>了， 因为 pod C在<code>Podfile.lock</code>中注册的版本是1.0.0，所以Podfile.lock就会锁定pod C只能安装使用1.0.0版本；</li>
+<li>阶段4： 检测新的可用pod<br>之后，user1 想知道那些pods更新了，那么可以运行<code>pod outdated</code>, <code>Cocoapods</code>将会列出有更新可用的pods, 比如 pod B 有一个<code>1.1.0</code>可用的新版本，pod C 有一个 <code>1.2.0</code>可用的新版本；<br>user1 决定更新pod B而不更新pod C， 那么运行 pod update B, 将会将 B由版本<code>1.0.0</code>更新到<code>1.1.0</code>（相应的，<code>Podfile.lock</code> 也进行更新）pod C将仍然是<code>1.0.0</code>而不是<code>1.2.0</code>；</li>
+</ul>
+<h1 id="六、在Podfile-中使用确切的版本并不能适用所有场景"><a href="#六、在Podfile-中使用确切的版本并不能适用所有场景" class="headerlink" title="六、在Podfile 中使用确切的版本并不能适用所有场景"></a>六、在Podfile 中使用确切的版本并不能适用所有场景</h1><p>一些开发者可能认为只要在Podfile文件中制定了特定的版本比如pod ‘A’, ‘1.0.0’， 就可以保证所有团队成员可以使用相同的pod 版本，其实并不是这样。<br>有一个经典的例子：如果pod A有一个pod依赖 A2，并且在pod A的<code>podspec</code>中进行了声明：<code>dependency &#39;A2&#39;, &#39;~&gt; 3.0&#39;</code>， 在这种场景下在<code>Podfile</code>文件中声明<code>pod &#39;A&#39;, &#39;1.0.0&#39;</code>确实能够保证user1和user2两者总是使用版本<code>1.0.0</code>，但是</p>
+<ul>
+<li><code>user1</code> 可以使用 pod A2 3.4.0版本(在user1使用的时候假设A2 3.4.0版本是最新的可用）</li>
+<li><code>user2</code>随后加入团队后，pod install获得的是 pod A2 3.5.0的版本（因为在<code>user2</code>的时候假设 3.5.0是可用的）<br>这就是为什么说使用<code>Podfile.lock</code>是唯一的途径让不同开发人员在不同的电脑上使用相同的pod的版本，并且要适当使用 <code>pod install</code>和 <code>pod update</code>。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Simple wechat" style="width: 200px; max-width: 100%;"/>
+    <div>“Stay Hungry , Stay Foolish ！”</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Simple
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2017/03/16/Cocoapos-的使用/" title="Cocoapos 的使用">http://yoursite.com/2017/03/16/Cocoapos-的使用/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cocoapods/" rel="tag"># cocoapods</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/16/Cocoapods中Podfile文件的创建和使用/" rel="prev" title="Cocoapods中Podfile文件的创建和使用">
+                Cocoapods中Podfile文件的创建和使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/16/Cocoapos-的使用/"
+           data-title="Cocoapos 的使用" data-url="http://yoursite.com/2017/03/16/Cocoapos-的使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Simple" />
+          <p class="site-author-name" itemprop="name">Simple</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/LDreame" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/f37df3e53ed7" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-rss-square"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、-什么是Cocoapods"><span class="nav-number">1.</span> <span class="nav-text">一、 什么是Cocoapods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、-pod-install-vs-pod-update-、pod-outdated"><span class="nav-number">2.</span> <span class="nav-text">二、 pod install vs. pod update 、pod outdated</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、-那么到底在那些场景下使用呢用呢？"><span class="nav-number">3.</span> <span class="nav-text">三、 那么到底在那些场景下使用呢用呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、Commit-提交-Podfile-lock"><span class="nav-number">4.</span> <span class="nav-text">四、Commit 提交 Podfile.lock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、适用场景举例"><span class="nav-number">5.</span> <span class="nav-text">五、适用场景举例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、在Podfile-中使用确切的版本并不能适用所有场景"><span class="nav-number">6.</span> <span class="nav-text">六、在Podfile 中使用确切的版本并不能适用所有场景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Simple</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"afengloveu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+
+</body>
+</html>
